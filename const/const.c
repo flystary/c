@@ -49,11 +49,11 @@
 
 // #include <stdio.h>
 
-// int main()
-// {
-//     printf("Helo\tWorld\n\n");
-//     return 0;
-// }
+int hello()
+{
+    printf("Helo\tWorld\n\n");
+    return 0;
+}
 /*
 char myChar = 'a';
 int myAsciiValue = (int) myChar; // 将 myChar 转换为 ASCII 值 97
@@ -77,13 +77,13 @@ dear"
 // 定义常量
 // #define identifier value
 
-/*
+
 #include<stdio.h>
 #define LENGTH  10
 #define WIDTH   5
 #define NEWLINE '\n'
 
-int main()
+int _define()
 {
     int area;
     area = LENGTH * WIDTH;
@@ -93,7 +93,6 @@ int main()
     return 0;
 }
 
-*/
 // const
 // const type variable = value;
 

@@ -19,11 +19,12 @@ extern
 */
 
 
-/*
+
 #include<stdio.h>
 void func1(void);
 static int count=10;
-int main()
+
+int _count()
 {
     while (count--) {
         func1();

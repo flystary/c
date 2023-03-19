@@ -1,21 +1,23 @@
 #include<stdio.h>
 #include<limits.h>
-
-// int main()
-// {
-//     char *a;
-
-//     a = "hello";
-//     printf("%s\n", a);
-//     // a = "liql";
-//     // printf("%s\n", a);
-//     printf("in size: %lu \n", sizeof(int));
-//     printf("in size: %lu \n", sizeof(*a));
-
-//     return 0;
-// }
-
 #include <float.h>
+
+
+int _hello1()
+{
+    char *a;
+
+    a = "hello";
+    printf("%s\n", a);
+    // a = "liql";
+    // printf("%s\n", a);
+    printf("in size: %lu \n", sizeof(int));
+    printf("in size: %lu \n", sizeof(*a));
+
+    return 0;
+}
+
+
 
 int main()
 {
@@ -24,7 +26,7 @@ int main()
     printf("float MAX size : %E\n", FLT_MIN);
     printf(" %d\n", FLT_DIG);
 
-    hello();
+    _hello2();
 
     if (sum() == 0) {
         printf("sum");
@@ -34,7 +36,7 @@ int main()
 }
 
 
-void hello()
+void _hello2()
 {
     int i = 0;
     float f = 3.14;
