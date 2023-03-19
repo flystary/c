@@ -9,3 +9,6 @@ count   运算符
 judge   判断
 loop    循环
 func    函数
+action  作用域
+array   数组
+
