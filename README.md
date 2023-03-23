@@ -15,3 +15,5 @@
 + enum -> 枚举
 + hand -> 指针
 + fhand -> 函数指针
++ char -> 字符串
++ struct -> 结构体
