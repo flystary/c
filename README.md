@@ -17,3 +17,4 @@
 + fhand -> 函数指针
 + char -> 字符串
 + struct -> 结构体
++ union -> 位域
