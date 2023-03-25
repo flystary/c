@@ -1,6 +1,6 @@
 # C
 
-
+## Basic C语言基础
 + hello -> hello
 + size  -> 数据类型
 + var   -> 变量
@@ -18,3 +18,6 @@
 + char -> 字符串
 + struct -> 结构体
 + union -> 位域
++ typedef -> typedef
++ inout -> 输入&输出
++ file -> 文件读写
