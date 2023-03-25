@@ -62,9 +62,78 @@ void def()
 
 
 // 预处理器运算符
+// 宏延续运算符(\)
+#define message_for(a, b) \
+    printf(#a " and " #b ": We love you!\n")
+
+// 字符串常量化运算符(#)
+// 在宏定义中，当需要把一个宏的参数转换为字符串常量时，则使用字符串常量化运算符（#）。在宏中使用的该运算符有一个特定的参数或参数列表
+#include<stdio.h>
+
+#define message_for1(a, b) \
+    printf(#a " and " #b ": We love you!\n")
+
+int print_mess(void)
+{
+    message_for1(Carole, Debra);
+    return 0;
+}
+
+
+// 标记粘贴运算符(##)
+// 宏定义内的标记粘贴运算符（##）会合并两个参数。它允许在宏定义中两个独立的标记被合并为一个标记。
+
+#define tokenpaster(n) printf("token" #n "= %d\n", token##n)
+
+int print_mess1(void)
+{
+    int token34 = 40;
+    tokenpaster(34);
+
+    return 0;
+}
+
+
+// defined() 运算符
+#if !defined (MESSAGE)
+    #define MESSAGE "You wish!"
+#endif
+
+int print_mess2(void)
+{
+    printf("Here  is message: %s\n", MESSAGE);
+    return 0;
+}
+
+// 参数化的宏
+int square(int x) {
+    return x * x;
+}
+
+#define square1(x) ((x) * (x))
+
+// 在使用带有参数的宏之前，必须使用 #define 指令定义。参数列表是括在圆括号内，且必须紧跟在宏名称的后边。宏名称和左圆括号之间不允许有空格
+
+
+#define MAX(x, y) ((x) > (y) ? (x) : (y))
+#define MIN(i, j) ((i) > (j) ? (j) : (i))
+
+int print_mess3()
+{
+    printf("Max between 20 and 100 is %d\n", MAX(20, 100));
+    printf("Min between 3.14 and 4.10 is %f\n", MIN(3.14, 4.10));
+
+    return 0;
+}
 
 
 int main()
 {
-    def();
+    // def();
+    print_mess();
+    print_mess1();
+    print_mess2();
+    print_mess3();
+
+    return 0;
 }
