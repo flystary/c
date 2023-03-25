@@ -1,6 +1,6 @@
 # C
 
-## Basic C语言基础
+## Basic
 + hello -> hello
 + size  -> 数据类型
 + var   -> 变量
@@ -21,3 +21,6 @@
 + typedef -> typedef
 + inout -> 输入&输出
 + file -> 文件读写
++ cpp -> 预处理器
+
+## Deep
