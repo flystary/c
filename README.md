@@ -22,5 +22,10 @@
 + inout -> 输入&输出
 + file -> 文件读写
 + cpp -> 预处理器
++ headf -> 头文件
++ cast  -> 强制类型转换
++ error -> 错误处理
++ recur -> 递归
++ vars -> 可变参数
 
 ## Deep

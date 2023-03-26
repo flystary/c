@@ -1,0 +1,2 @@
+
+char  *test (void);
