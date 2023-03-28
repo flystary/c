@@ -83,9 +83,9 @@ int date()
 
 int xyz()
 {
-    int x, y, x, t;
+    int x, y, z, t;
     printf("\n请输入三个数字: \n");
-
+    scanf("%d %d %d", &x, &y, &z);
     if (x > y) {
         t = x; x = y; y = t;
     }
@@ -127,6 +127,47 @@ int aba()
     return 0;
 }
 
+/*
+#include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
+
+int abca(void)
+{
+    int i,j;
+    SetConsoleOutputCP(437);
+    char a=176,b=219;
+    for(i=0;i<5;i++)
+    {
+        for(j=0;j<5;j++)
+        {
+            if(i==j||(i+j+1)==5)
+                printf("%c",b);
+            else
+                printf("%c%c",a,a);
+        }
+        printf("\n");
+    }
+}
+*/
+
+#define LEN 5
+
+int abcda()
+{
+    int i, j;
+    char *gray_block = "█",      // utf-8字符：9608
+         *textured_block = "▒";  // utf-8字符：9618
+    for(i=0; i<LEN; i++)  // 行循环
+    {
+        for(j=0; j<LEN; j++)  // 列循环
+            if(i==j || i+j==LEN-1) printf("%s", gray_block);
+            else printf("%s", textured_block);
+        putchar('\n');  // 换行
+    }
+    return 0;
+}
+
 int nine()
 {
     int i, j, result;
@@ -159,14 +200,124 @@ int norepeat()
 }
 
 
+int smile()
+{
+    int i, j;
+    printf("\1\1\n");
+    for(i=1;i<11;i++)
+    {
+        for(j=1;j<=i;j++)
+            printf("%c%c", 219,219);
+        printf("\n");
+    }
+    return 0;
+}
+
+/*
+#include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
+
+int smile1(void)
+{
+    SetConsoleOutputCP(437);
+    char a=219;
+    printf("\1\1\n");
+    for(int i=0;i<=9;i++)
+    {
+        for(int j=0;j<=i;j++)
+        printf("%c",a);
+        printf("\n");
+    }
+    return 0;
+}
+*/
+
+/*
+int smile2(void)
+{
+    printf("◎◎\n");
+    for(int i=0;i<20;i++)
+    {
+        for(int j=0;j<=i+1;j++)
+        {
+            printf("■");
+        }
+        printf("\n");
+    }
+    return 0;
+}
+*/
+
+int rabbit(void)
+{
+    int f1=1, f2=1, i;
+    for(i=1;i<20;i++)
+    {
+        printf("%12d%12d", f1, f2);
+        if(i%2==0) printf("\n");
+        f1=f1+f2;
+        f2=f1+f2;
+    }
+
+    return 0;
+}
+
+int prime_number()
+{
+    int i, j;
+    int count=0;
+
+    for (i=101; i<=200; i++)
+    {
+        for (j=2; j<i; j++)
+        {
+            if(i%j==0)
+            break;
+        }
+
+        if (j>=i)
+        {
+            count++;
+            printf("%d ", i);
+            if (count % 5 == 0)
+            printf("\n");
+        }
+    }
+    return 0;
+}
+
+int narcissus()
+{
+    int i, x, y, z;
+    for(i=100; i<1000;i++)
+    {
+        x=i%10;
+        y=i/10%10;
+        z=i/100%10;
+
+        if(i==(x*x*x+y*y*y+z*z*z))
+        printf("%d\n", i);
+    }
+
+    return 0;
+}
+
 int main()
 {
-    hello();
-    number();
-    xy();
-    date();
-    xyz();
-    print_c();
-    aba();
-    nine();
+    // hello();
+    // number();
+    // xy();
+    // date();
+    // xyz();
+    // print_c();
+    // aba();
+    // abca(); windows
+    // abcda();
+    // nine();
+    // norepeat();
+    // smile();
+    // rabbit();
+    // prime_number();
+    narcissus();
 }
