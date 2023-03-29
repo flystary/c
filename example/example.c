@@ -324,6 +324,63 @@ int factorization_prime_number()
     return 0;
 }
 
+int ternary()
+{
+    int score;
+    char grade;
+
+    printf("请输入分数: ");
+    scanf("%d", &score);
+
+    grade=(score>=90)?'A':((score>=60)?'B':'C');
+    printf("%c\n", grade);
+    return 0;
+}
+
+int divisor_and_multiple()
+{
+    int a, b, t, r, n;
+    printf("请输入两个数字: \n");
+
+    scanf("%d %d", &a, &b);
+
+    if(a > b)
+    {t=b;b=a;a=t;}
+    r=a%b;
+    n=a*b;
+    while (r!=0)
+    {
+        a=b;
+        b=r;
+        r=a%b;
+    }
+    printf("这两个数的最大公约数是%d，最小公倍数是%d\n",b,n/b);
+
+    return 0;
+}
+
+int char_statistics()
+{
+    char c;
+    int letters=0, spaces=0, digits=0, others=0;
+    printf("请输入一些字母：\n");
+
+    while ((c=getchar()) != '\n')
+    {
+        if ((c>='a'&&c<='z')||(c>'A'&&c<='Z'))
+            letters++;
+        else if(c>='0'&&c<='9')
+            digits++;
+        else if(c==' ')
+            spaces++;
+        else
+            others++;
+    }
+    printf("字母=%d,数字=%d,空格=%d,其他=%d\n",letters,digits,spaces,others);
+    return 0;
+
+}
+
 int main()
 {
     // hello();
@@ -341,5 +398,8 @@ int main()
     // rabbit();
     // prime_number();
     // narcissus();
-    factorization_prime_number();
+    // factorization_prime_number();
+    // ternary();
+    // divisor_and_multiple();
+    char_statistics();
 }
