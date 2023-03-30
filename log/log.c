@@ -5,7 +5,7 @@
 #include <unistd.h>
 
 static void nolocks_localtime(struct tm *tmp, time_t t, time_t tz, int dst);
-static void nolocks_loacltime_bj(struct tm *tmp, time_t t);
+static void nolocks_localtime_bj(struct tm *tmp, time_t t);
 
 static const char LOG_ERROR[][8] = {"Debug", "Info", "Warn", "Error", "Fatal"};
 
@@ -44,9 +44,9 @@ void Initlog(log_t *log, LOG_MODE mode, LEVEL_TYPE level, const char *path, cons
     memset(log->log_path, 0, sizeof(log->log_path));
     memset(log->log_name, 0, sizeof(log->log_name));
     memset(log->context, 0, MAX_CONTEXT);
-    log->flag = 0;
+    log->flag     = 0;
     log->log_file = NULL;
-    log->level = level;
+    log->level    = level;
 
     if (0 < mode && mode < L_MODE_UNKNOW)
     {
@@ -67,7 +67,7 @@ void Initlog(log_t *log, LOG_MODE mode, LEVEL_TYPE level, const char *path, cons
             len = strlen(log->log_path);
         if (log->log_path[len - 1] != '/')
         {
-            log->log_path[len] = '/';
+            log->log_path[len]     = '/';
             log->log_path[len + 1] = '\0';
         }
     }
@@ -126,12 +126,12 @@ void Wlog(log_t *log, LEVEL_TYPE level, const char *format, ...)
                 strcat(log->log_name, "-");
                 strcat(log->log_name, log->log_file_postfix);
             }
-            newtime_temp = newtime;
+            newtime_temp         = newtime;
             newtime_temp.tm_hour = 0;
-            newtime_temp.tm_min = 0;
-            newtime_temp.tm_sec = 0;
-            log->last_time = mktime(&newtime_temp);
-            log->log_file = fopen(log->log_name, "a+");
+            newtime_temp.tm_min  = 0;
+            newtime_temp.tm_sec  = 0;
+            log->last_time       = mktime(&newtime_temp);
+            log->log_file        = fopen(log->log_name, "a+");
         }
 
         if (long_time - log->last_time >= 86400)
@@ -226,14 +226,14 @@ static int is_leap_year(time_t year)
 
 static void nolocks_localtime(struct tm *tmp, time_t t, time_t tz, int dst)
 {
-    const time_t secs_min = 60;
+    const time_t secs_min  = 60;
     const time_t secs_hour = 3600;
-    const time_t secs_day = 3600 * 24;
+    const time_t secs_day  = 3600 * 24;
 
     t -= tz;
     t += 3600 * dst;
-    time_t days = t / secs_day;
-    time_t seconds = t / secs_day;
+    time_t days    = t / secs_day;
+    time_t seconds = t % secs_day;
 
     tmp->tm_isdst = dst;
     tmp->tm_hour = seconds / secs_hour;
@@ -267,7 +267,7 @@ static void nolocks_localtime(struct tm *tmp, time_t t, time_t tz, int dst)
     tmp->tm_year -= 1900;
 }
 
-static void nolocks_localtime_bi(struct tm *tmp, time_t t)
+static void nolocks_localtime_bj(struct tm *tmp, time_t t)
 {
     nolocks_localtime(tmp, t, -8 * 3600, 0);
 }
