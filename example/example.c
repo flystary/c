@@ -381,8 +381,177 @@ int char_statistics()
 
 }
 
-int main()
+
+int all_sum()
 {
+    int s=0, a, n, t;
+    printf("请输入a和n :\n");
+
+    scanf("%d %d", &a, &n);
+    t = a;
+
+    while (n>0)
+    {
+        // s+=t;
+        s = s + t;
+        a=a*10;
+        printf("a: %d\n", a);
+        // t+=a;
+        t = t + a;
+        printf("t: %d\n", t);
+        n--;
+    }
+    printf("a+aa+aaa+...=%d\n", s);
+    return 0;
+
+}
+#define N 1000
+int perfect_number(void)
+{
+    int i, j, k, n, sum;
+    int a[256];
+
+    for(i=2; i<=N; i++)
+    {
+        sum = a[0] = 1;
+        k = 0;
+        for(j=2;j<=(i/2);j++)
+        {
+            if(i%j==0)
+            {
+                sum+=j;
+                a[++k]=j;
+            }
+        }
+        if(i==sum)
+        {
+            printf("%d=%d", i, a[0]);
+            for(n=1;n<=k;n++)
+                printf("+%d", a[n]);
+            printf("\n");
+        }
+    }
+    return 0;
+}
+
+int rebound(int max)
+{
+    float h, s;
+    h=s=100;
+    h=h/2;
+    int i;
+
+    for(i=2; i<=max; i++)
+    {
+        printf("%f\n", h);
+        s=s+2*h;
+        h=h/2;
+    }
+    printf("第10次落地时，共经过%f米，第10次反弹高%f米\n",s,h);
+    return 0;
+}
+
+#include<stdlib.h>
+int rattle()
+{
+    char i,j,k;
+    for(i='x';i<='z';i++) {
+        for(j='x';j<='z';j++) {
+            if(i!=j) {
+                for(k='x';k<='z';k++) {
+                    if(i!=k&&j!=k) {
+                        if(i!='x'&&k!='x'&&k!='z') {
+                            printf("顺序为：a--%c\tb--%c\tc--%c\n",i,j,k);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+int rhombus()
+{
+    int i,j,k;
+    for(i=0;i<=3;i++) {
+        for(j=0;j<=2-i;j++) {
+            printf(" ");
+        }
+        for(k=0;k<=2*i;k++) {
+            printf("*");
+        }
+        printf("\n");
+    }
+    for(i=0;i<=2;i++) {
+        for(j=0;j<=i;j++) {
+            printf(" ");
+        }
+        for(k=0;k<=4-2*i;k++) {
+            printf("*");
+        }
+        printf("\n");
+    }
+    return 0;
+}
+
+
+int fraction_sum()
+{
+    int i, t;
+    float sum=0;
+    float a=2, b=1;
+
+    for(i=1;i<20;i++)
+    {
+        sum=sum+a/b;
+        t=a;
+        a=a+b;
+        b=t;
+    }
+
+    printf("%9.6f\n", sum);
+}
+
+factorial_sum()
+{
+    int i;
+    long double sum, mix;
+    sum=0, mix=1;
+    for(i=1;i<20;i++)
+    {
+        mix=mix*i;
+        sum=sum+mix;
+    }
+
+    printf("%LF\n", sum);
+}
+
+
+int fact(int j)
+{
+    int sum;
+    if(j==0){
+        sum=1;
+    } else {
+        sum=j*fact(j-1);
+    }
+    return sum;
+}
+
+int print_fact()
+{
+    int i;
+    int fact(int);
+    for(i=0; i<6;i++){
+        printf("%d!=%d\n", i, fact(i));
+    }
+
+    return 0;
+}
+
+// int main()
+// {
     // hello();
     // number();
     // xy();
@@ -401,5 +570,46 @@ int main()
     // factorization_prime_number();
     // ternary();
     // divisor_and_multiple();
-    char_statistics();
+    // char_statistics();
+    // all_sum();
+    // perfect_number();
+    // rebound(10);
+    // rattle();
+    // rhombus();
+    // fraction_sum();
+    // factorial_sum();
+    // print_fact();
+// }
+
+void palin(n)
+int n;
+{
+    char next;
+    if(n<=1) {
+        next=getchar();
+        printf("相反顺序输出结果\40:\40");
+        putchar(next);
+    } else {
+        next=getchar();
+        palin(n-1);
+        putchar(next);
+    }
+}
+
+int prin_palin(int n)
+{
+    // int i=5;
+    void palin(int n);
+     printf("请输入%d个字符\40:\40", n);
+    palin(n);
+    printf("\n");
+
+    return 0;
+}
+
+int main()
+{
+    prin_palin(10);
+
+    return 0;
 }
