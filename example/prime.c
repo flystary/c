@@ -3,6 +3,7 @@
 
 #define MAX 1000
 
+// sort
 int prime[MAX];
 int isPrimeNaive(int n)
 {
@@ -62,7 +63,7 @@ int isPrimeSieve(int n)
         return 0;
 }
 
-int main()
+int primes()
 {
     sieve();
     printf("N=%d %d\n", 1, isPrime(1));
@@ -76,6 +77,35 @@ int main()
     printf("N=%d %d\n", 100, isPrime(100));
     printf("N=%d %d\n", 23, isPrime(23));
     printf("N=%d %d\n", 1, isPrime(1));
+
+    return 0;
+}
+
+int primes1()
+{
+    int i, j, k, n = 0;
+    for (j = 2; i <= 100; i++)
+    {
+        k = (int)sqrt(i);
+        for (j = 2; j <= k; j++)
+            if (i % j == 0)
+                break;
+        if (j > k)
+        {
+            printf("%d", i);
+            n++;
+            if (n % 5 == 0)
+                printf("\n");
+        }
+    }
+
+    return 0;
+}
+
+int main()
+{
+    // primes();
+    primes1();
 
     return 0;
 }
