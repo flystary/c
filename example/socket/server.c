@@ -11,8 +11,8 @@
 int main()
 {
     int listenfd, connfd;
-    int listenfds = socket(AF_INET, SOCK_STREAM, 0);
-    if (listenfds == -1)
+    listenfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (listenfd == -1)
     {
         perror("socket");
         return -1;
@@ -47,7 +47,7 @@ int main()
         return -1;
     }
 
-    char buf[1024], cip[100];
+    char buf[1024], cip[100] = {0};
     socklen_t addrlen = sizeof(caddr);
     while (1)
     {
@@ -67,6 +67,7 @@ int main()
             perror("read");
             return -1;
         }
+        printf("111\n");
         ret = write(connfd, buf, sizeof(buf));
         if (-1 == ret)
         {
