@@ -92,14 +92,40 @@ int s()
     return 0;
 }
 
+#define M 5
+int m()
+{
+    int a[M] = {1, 2, 3, 4, 5};
+    int i, j, t;
+    i = 0;
+    j = M - 1;
+    while (i < j)
+    {
+        t = *(a + i);
+        // printf("%c\n", t);
+        *(a + i) = *(a + j);
+        *(a + j) = t;
+        i++;
+        j--;
+    }
+
+    for(i=0;i<M;i++)
+    {
+        printf("%d\n", *(a+i));
+    }
+
+    return 0;
+}
+
 int main()
 {
-    x();
-    printf("\n");
+    // x();
+    // printf("\n");
     // y();
-    z();
-    printf("\n");
-    s();
+    // z();
+    // printf("\n");
+    // s();
+    m();
 
     return 0;
 }
