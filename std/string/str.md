@@ -16,6 +16,7 @@ string .h 头文件定义了一个变量类型、一个宏和各种操作字符�
 下面是头文件 string.h 中定义的函数：
 
 |序号|函数|描述|
+|----|-----|----|
 |1|void *memchr(const void *str, int c, size_t n)|在参数 str 所指向的字符串的前 n 个字节中搜索第一次出现字符 c（一个无符号字符）的位置。|
 2	int memcmp(const void *str1, const void *str2, size_t n)
 把 str1 和 str2 的前 n 个字节进行比较。
