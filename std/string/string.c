@@ -275,6 +275,127 @@ int scspn()
 
 	return (0);
 }
+#include <stdio.h>
+#include <errno.h>
+
+int serror()
+{
+	FILE *fp;
+
+	fp = fopen("file.txt", "r");
+	if (fp == NULL)
+	{
+		printf("Error: %s\n", strerror(errno));
+	}
+
+	return (0);
+}
+
+int slen()
+{
+	char str[50];
+	int len;
+
+	strcpy(str, "This is baidu.com");
+	len = strlen(str);
+
+	printf("|%s|的长度是|%d|\n", str, len);
+
+	return (0);
+}
+
+int spbrk()
+{
+	const char str1[] = "abcde2fghi3jk4l";
+	const char str2[] = "34";
+	char *ret;
+
+	ret = strpbrk(str1, str2);
+	if (ret)
+	{
+		printf("第一个匹配的字符是： %c\n", *ret);
+	}
+	else
+	{
+		printf("未找到字符");
+	}
+
+	return (0);
+}
+
+int srchr()
+{
+	int len;
+	const char str[] = "https://www.runoob.com";
+	const char ch = '.';
+	char *ret;
+
+	ret = strrchr(str, ch);
+
+	printf("|%c| 之后的字符串是 - |%s|\n", ch, ret);
+
+	return (0);
+}
+
+int sspn()
+{
+	int len;
+	const char str1[] = "ABCDEFG019874ABCD";
+	const char str2[] = "ABCD";
+
+	len = strspn(str1, str2);
+
+	printf("初始段匹配长度 %d\n", len);
+
+	return (0);
+}
+
+int sstr()
+{
+	const char haystack[20] = "RUNOOB";
+	const char needle[10] = "NOOB";
+	char *ret;
+
+	ret = strstr(haystack, needle);
+
+	printf("子字符串是： %s\n", ret);
+
+	return (0);
+}
+
+int stok()
+{
+	char str[80] = "This is - www.runoob.com - website";
+	const char s[2] = "-";
+	char *token;
+
+	/* 获取第一个子字符串 */
+	token = strtok(str, s);
+
+	/* 继续获取其他的子字符串 */
+	while (token != NULL)
+	{
+		printf("%s\n", token);
+
+		token = strtok(NULL, s);
+	}
+
+	return (0);
+}
+
+int sxfrm()
+{
+	char dest[20];
+	char src[20];
+	int len;
+
+	strcpy(src, "W3C School");
+	len = strxfrm(dest, src, 20);
+
+	printf("\n字符串 |%s| 的长度是： |%d|\n", dest, len);
+
+	return (0);
+}
 
 int main()
 {
@@ -290,8 +411,16 @@ int main()
 	// sncmp();
 	// scoll();
 	// scpy();
-	sncpy();
-	scspn();
+	// sncpy();
+	// scspn();
+	// serror();
+	// slen();
+	// spbrk();
+	// srchr();
+	// sspn();
+	// sstr();
+	stok();
+	sxfrm();
 
 	return (0);
 }
