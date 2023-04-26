@@ -1,6 +1,6 @@
 #include <string.h>
 
-int chr()
+int mchr()
 {
 	const char str[] = "http://www.baidu.com";
 	const char ch1 = '.';
@@ -20,7 +20,7 @@ int chr()
 	return (0);
 }
 
-int cmp()
+int mcmp()
 {
 	char str1[15];
 	char str2[15];
@@ -46,7 +46,7 @@ int cmp()
 	return (0);
 }
 
-int cpy()
+int mcpy()
 {
 	const char src[50] = "http://www.baidu.com/ or http://www.shifen.com/";
 	char dest[50];
@@ -71,7 +71,7 @@ int cpy()
 	return (0);
 }
 
-int move()
+int mmove()
 {
 	const char dst[] = "oldstring";
 	const char src[] = "newstring";
@@ -83,7 +83,7 @@ int move()
 	return (0);
 }
 
-int set()
+int mset()
 {
 	char str[50];
 	strcpy(str, "This is String.h library funtion");
@@ -92,14 +92,206 @@ int set()
 	memset(str, '@', 7);
 	puts(str);
 
-	return(0);
+	return (0);
 }
+
+int scat()
+{
+	char src[50], dst[50];
+	strcpy(src, "This is source");
+	strcpy(dst, "This is destination");
+
+	strcat(dst, src);
+	printf("最终的目标字符串： |%s|\n", dst);
+
+	return 0;
+}
+
+int sncat()
+{
+	char src[50], dest[50];
+
+	strcpy(src, "This is source SRC");
+	strcpy(dest, "This is destination");
+
+	strncat(dest, src, 17);
+
+	printf("最终的目标字符串： |%s|\n", dest);
+
+	return (0);
+}
+
+int schr()
+{
+	const char str[] = "https://www.baidu.com";
+	const char ch = 'i';
+	char *ptr;
+
+	ptr = strchr(str, ch);
+	if (ptr != NULL)
+	{
+		printf("字符 'i' 出现的位置为 %ld。\n", ptr - str + 1);
+		printf("|%c| 之后的字符串是 - |%s|\n", ch, ptr);
+	}
+	else
+	{
+		printf("没有找到字符 'o' 。\n");
+	}
+
+	char *find;
+	find = strchr(ptr, '\n'); // 查找换行符
+	if (find)				  // 如果地址不是NULL
+		*find = '\0';		  // 在此处放置一个空字符
+	else
+		while (getchar() != '\n')
+			continue;
+
+	return (0);
+}
+
+int scmp()
+{
+	char str1[15];
+	char str2[15];
+	int ret;
+
+	strcpy(str1, "abcdef");
+	strcpy(str2, "ABCDEF");
+
+	ret = strcmp(str1, str2);
+
+	if (ret < 0)
+	{
+		printf("str1 小于 str2");
+	}
+	else if (ret > 0)
+	{
+		printf("str1 大于 str2");
+	}
+	else
+	{
+		printf("str1 等于 str2");
+	}
+
+	return (0);
+}
+int sncmp()
+{
+	char str1[15];
+	char str2[15];
+	int ret;
+
+	strcpy(str1, "abcdef");
+	strcpy(str2, "ABCDEF");
+
+	ret = strncmp(str1, str2, 4);
+
+	if (ret < 0)
+	{
+		printf("str1 小于 str2");
+	}
+	else if (ret > 0)
+	{
+		printf("str2 小于 str1");
+	}
+	else
+	{
+		printf("str1 等于 str2");
+	}
+
+	return (0);
+}
+
+int scoll()
+{
+	char str1[15];
+	char str2[15];
+	int ret;
+
+	strcpy(str1, "abc");
+	strcpy(str2, "ABC");
+
+	ret = strcoll(str1, str2);
+
+	if (ret > 0)
+	{
+		printf("str1 大于 str2\n");
+	}
+	else if (ret < 0)
+	{
+		printf("str2 小于 str1\n");
+	}
+	else
+	{
+		printf("str1 等于 str2\n");
+	}
+	return (0);
+}
+
+int scpy()
+{
+	char src[40];
+	char dest[100];
+
+	memset(dest, '\0', sizeof(dest));
+	strcpy(src, "This is runoob.com");
+	strcpy(dest, src);
+
+	printf("最终的目标字符串： %s\n", dest);
+
+	char str1[] = "Sample string";
+	char str2[40];
+	char str3[40];
+	strcpy(str2, str1);
+	strcpy(str3, "copy successful");
+	printf("str1: %s\nstr2: %s\nstr3: %s\n", str1, str2, str3);
+
+	return (0);
+}
+
+int sncpy()
+{
+	char src[40];
+	char dest[12];
+
+	memset(dest, '\0', sizeof(dest));
+	strcpy(src, "This is runoob.com");
+	strncpy(dest, src, 10);
+
+	printf("最终的目标字符串： %s\n", dest);
+
+	return (0);
+}
+
+int scspn()
+{
+	int len;
+	const char str1[] = "ABCDEF4 3 0960910";
+	const char str2[] = "013";
+
+	len = strcspn(str1, str2);
+
+	printf("第一个匹配的字符是在 %d\n", len + 1);
+
+	return (0);
+}
+
 int main()
 {
-	// chr();
-	// cmp();
-	// cpy();
-	// move();
-	set();
+	// mchr();
+	// mcmp();
+	// mcpy();
+	// mmove();
+	// mset();
+	// scat();
+	// sncat();
+	// schr();
+	// scmp();
+	// sncmp();
+	// scoll();
+	// scpy();
+	sncpy();
+	scspn();
+
 	return (0);
 }
