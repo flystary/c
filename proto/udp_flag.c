@@ -2,17 +2,19 @@
 
 #pragma pack(1)
 
-struct ethhdr
+typedef struct ethhdr
 {
     unsigned char h_dst[MAC_ADDR_LEN];
     unsigned char h_src[MAC_ADDR_LEN];
     unsigned short h_proto;
 };
 
-struct iphdr
+#pragma pack()
+
+typedef struct iphdr
 {
-    unsigned char version:4;
-                  hdarlen:4;
+    unsigned char version : 4;
+    unsigned char hdarlen : 4;
 
     unsigned char tos;
     unsigned short totlen;
@@ -28,7 +30,7 @@ struct iphdr
     unsigned int dip;
 };
 
-struct udphdr
+typedef struct udphdr
 {
     unsigned short sport;
     unsigned short dport;
@@ -37,21 +39,20 @@ struct udphdr
     unsigned short check;
 };
 
-struct udppkt
+typedef struct udppkt
 {
-    struct ethhdr eth; //
+    struct ethhdr eth; // 14
     struct iphdr ip;   // 20
     struct udphdr udp; // 8
 
     unsigned char data[0];
 };
 
-int mian()
+#include<stdio.h>
+int main()
 {
-    printf("%d\n", sizeof(ethhdr));
-    printf("%d\n", sizeof(iphdr));
-    printf("%d\n", sizeof(udphdr));
-    printf("%d\n", sizeof(udppkt));
-
-    return 0;
+    printf("%d\n",sizeof(struct ethhdr));
+    printf("%d\n",sizeof(struct iphdr));
+    printf("%d\n",sizeof(struct udphdr));
+    printf("%d\n",sizeof(struct udppkt));
 }
