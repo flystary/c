@@ -1,4 +1,7 @@
 #define MAC_ADDR_LEN 5
+
+#pragma pack(1)
+
 struct ethhdr
 {
     unsigned char h_dst[MAC_ADDR_LEN];
@@ -8,8 +11,8 @@ struct ethhdr
 
 struct iphdr
 {
-    unsigned char version : 4;
-    hdarlen : 4;
+    unsigned char version:4;
+                  hdarlen:4;
 
     unsigned char tos;
     unsigned short totlen;
@@ -25,7 +28,7 @@ struct iphdr
     unsigned int dip;
 };
 
-struct udphpr
+struct udphdr
 {
     unsigned short sport;
     unsigned short dport;
@@ -36,7 +39,19 @@ struct udphpr
 
 struct udppkt
 {
-    struct ethhdr eth;
-    struct iphdr ip;
-    struct udphdr udp;
+    struct ethhdr eth; //
+    struct iphdr ip;   // 20
+    struct udphdr udp; // 8
+
+    unsigned char data[0];
 };
+
+int mian()
+{
+    printf("%d\n", sizeof(ethhdr));
+    printf("%d\n", sizeof(iphdr));
+    printf("%d\n", sizeof(udphdr));
+    printf("%d\n", sizeof(udppkt));
+
+    return 0;
+}
