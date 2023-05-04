@@ -1,3 +1,4 @@
+#include<stdio.h>
 #define MAC_ADDR_LEN 5
 
 #pragma pack(1)
@@ -48,7 +49,6 @@ typedef struct udppkt
     unsigned char data[0];
 };
 
-#include<stdio.h>
 int main()
 {
     printf("%d\n",sizeof(struct ethhdr));
