@@ -71,6 +71,8 @@ set ts=4
 let &guicursor = &guicursor . ",a:blinkon0"
 
 set nu
+set shiftwidth=4
+set expandtab
  
 highlight LineNr cterm=bold ctermfg=red
 highlight StorageClass cterm=bold ctermfg=darkgreen
