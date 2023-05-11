@@ -19,7 +19,7 @@ int f_clearerr()
 {
     FILE *fp;
     char c;
-    
+
     fp = fopen("file.txt", "w");
 
     c = fgetc(fp);
@@ -27,12 +27,12 @@ int f_clearerr()
     {
         printf("读取文件：file.txt 时发生错误\n");
     }
-    
+
     clearerr(fp);
     if( ferror(fp) )
     {
         printf("读取文件：file.txt 时发生错误\n");
-    }    
+    }
     fclose(fp);
 
     return 0;
@@ -42,7 +42,7 @@ int f_feof()
 {
     FILE *fp;
     int c;
-    
+
 
     fp = fopen("file.txt", "r");
 
@@ -96,14 +96,14 @@ int f_fflush()
 
     fprintf(stdout, "启用全缓冲\n");
     setvbuf(stdout, buff, _IOFBF, 1024);
- 
+
     fprintf(stdout, "这里是 www.baidu.com\n");
     fprintf(stdout, "该输出将保存到 buff\n");
     fflush( stdout );
- 
+
     fprintf(stdout, "这将在编程时出现\n");
     fprintf(stdout, "最后休眠五秒钟\n");
- 
+
     sleep(5);
 
     return 0;
@@ -123,7 +123,7 @@ int f_fgetpos()
     fputs("这将覆盖之前的内容", fp);
 
     fclose(fp);
-    
+
     return 0;
 }
 
@@ -190,6 +190,84 @@ int f_fread()
 
 }
 
+
+int f_freopen()
+{
+    FILE *fp;
+    printf("stdout \n");
+
+    fp = freopen("file.txt", "w+", stdout);
+    printf("该文本重定向到file.txt\n");
+
+    fclose(fp);
+
+    return 0;
+}
+
+int f_fseek()
+{
+    FILE *fp;
+
+    fp = fopen("file.txt", "w+");
+
+    fputs("This is www.baidu.com", fp);
+
+    fseek(fp, 7, SEEK_SET);
+    fputs("C Programming Langauge", fp);
+    fclose(fp);
+
+    return 0;
+}
+
+f_fsetpos()
+{
+    FILE *fp;
+    fpos_t position;
+
+    fp = fopen("file.txt", "w+");
+    fgetpos(fp, &position);
+    fputs("Hello, World!", fp);
+
+    fsetpos(fp, &position);
+    fputs("这将覆盖之前的内容", fp);
+    fclose(fp);
+
+    return 0;
+}
+
+int f_ftell()
+{
+    FILE *fp;
+    int len;
+
+    fp = fopen("file.txt", "r");
+    if( fp == NULL ) 
+    {
+       perror ("打开文件错误");
+       return(-1);
+    }
+    fseek(fp, 0, SEEK_END);
+
+    len = ftell(fp);
+    fclose(fp);
+
+    printf("file.txt 的总大小 = %d 字节\n", len);
+    
+    return(0);
+}
+
+int f_fwrite()
+{
+    FILE *fp;
+    char str[] = "This is baidu.com";
+
+    fp = fopen("file.txt", "w");
+    fwrite(str, sizeof(str), 1, fp);
+
+    fclose(fp);
+    return 0;
+}
+
 int main()
 {
     // f_close();
@@ -199,7 +277,12 @@ int main()
     // f_fflush();
     // f_fgetpos();
     // f_fopen();
-    f_fread();
+    // f_fread();
+    // f_freopen();
+    // f_fseek();
+    // f_fsetpos();
+    // f_ftell();
+    f_fwrite();
 
     // print();
     return 0;
