@@ -19,16 +19,63 @@ typedef struct {
     };
 } ipaddr_t;
 
-#define ip_hdr_get_addr_low32(iph, sadrr, daddr) do {
-    const struct ip6_hdr *ip6h = (const struct ip6_hdr *)iph;
+#define ip_hdr_get_addr_low32(iph, sadrr, daddr) do {          \
+    const struct ip6_hdr *ip6h = (const struct ip6_hdr *)iph;  \
+                                                               \           
+    if (iph->version == 4) {                                   \
+        sadrr = iph->saddr;                                    \
+        dadrr = iph->daddr;                                    \
+    } else {                                                   \
+        saddr = ip6h->ip6_src.s6_addr32[3];                    \
+        daddr = ip6h->ip6_dst.s6_addr32[3];                    \
+    }                                                          \
+} while (0)                                                    \
 
-    if (iph->version == 4) {
-        sadrr = iph->saddr;
-        dadrr = iph->daddr;
-    } else {
-        saddr = ip6h->ip6_src.s6_addr32[3];
-        daddr = ip6h->ip6_dst.s6_addr32[3];
-    }
-} while (0)
 
+static inline void ipaddr_join(const ipaddr_t *prefix, uint32_t last, ipaddr_t *addr)
+{
+    addr->in6 = prefix->in6;
+    addr->ip  = last;
+}
 
+#define ipaddr_last_byte(addr) ((addr).in6.s6_addr[15])
+#define ipaddr_eq(addr0, addr1) (memcmp((const void*)(addr0), (const void*)addr1, sizeof(struct in6_addr)) == 0)
+
+static inline void iph_swap_addr(struct iphdr *iph)
+{
+    uint32_t ip = iph->saddr;
+    iph->saddr  = iph->darr;
+    iph->daddr  = ip;
+}
+
+static inline void ip6h_swap_addr(struct ip6_hdr *ip6h)
+{
+    struct ip6_addr addr;
+
+    addr = ip6h->ip6_src;
+    ip6h->ip6_src = ip6h->dst;
+    ip6h->ip6_dst = addr;
+}
+
+#define IPV4_STR(addr) \
+    ((const unsigned char *)&(addr))[0], \
+    ((const unsigned char *)&(addr))[1], \
+    ((const unsigned char *)&(addr))[2], \
+    ((const unsigned char *)&(addr))[3]
+#define IPV4_FMT "%u.%u.%u.%u"
+
+#define IPV6_STR(addr) \
+    ntohs(((uint16_t*)&(addr))[0]), \
+    ntohs(((uint16_t*)&(addr))[1]), \
+    ntohs(((uint16_t*)&(addr))[2]), \
+    ntohs(((uint16_t*)&(addr))[3]), \
+    ntohs(((uint16_t*)&(addr))[4]), \
+    ntohs(((uint16_t*)&(addr))[5]), \
+    ntohs(((uint16_t*)&(addr))[6]), \
+    ntohs(((uint16_t*)&(addr))[7])
+#define IPV6_FMT "%04x:%04x:%04x:%04x:%04x:%04x:%04x:%04x" 
+
+int  ipaddr_init(ipaddr_t *ip, const char *str);
+void ipaddr_inc(ipaddr_t *ip, uint32_t n);
+
+#endif
