@@ -41,4 +41,30 @@ int main(int argc, char **argv)
     if (config_parse(argc, argv, &g_config) < 0) {
         return 1;
     }
+    if (config_parse(argc, argv, &g_config) < 0) {
+        return 1;
+    }
+
+    if (g_config.daemon) {
+        if (daemon(1, 1) != 0) {
+            printf("daemon error\n");
+            return 1;
+        }
+    }
+
+    if (ctl_thread_start(&g_config, &thread) < 0) {
+        printf("ctl thread start error\n");
+        return 1;
+    }
+
+    if (dpdk_init(&g_config, argv[0]) < 0) {
+        printf("dpdk init fail\n");
+        return 1;
+    }
+
+    dpdk_run(lcore_main, NULL);
+    ctl_thread_wait(thread);
+    dpdk_close(&g_config);
+
+    return 0;
 }
