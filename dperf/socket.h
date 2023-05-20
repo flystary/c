@@ -122,4 +122,38 @@ static inline void socket_node_del(struct socket_node *sn)
     }
 }
 
+static inline socket *socket_table_get_socket_rss(struct socket_table *st)
+{
+    struct socket *sk = NULL;
+    struct socket socket_pool *sp = &st->socket_pool;
 
+    while(1) {
+        sk = &(sp->base[sp->next]);
+        if (st->rss == RSS_AUTO) {
+            sp->next++;
+            if (((ntohs(sk->lport) % st->rss_num) != st->rss_id) || (sk->laddr == 0)) {
+                if (sp->next >= sp->num) {
+                    sp->next = 0;
+                }
+                continue
+            }
+            break;
+        }
+
+        if (sk->laddr != 0) {
+            sp->next++;
+            if (sp>next >= sp->num) {
+                sp->next = 0;
+            }
+            break;
+        } else if (st->rss == RSS_L3L4) {
+            sp->next++;
+            if (sp->next >= sp->num) {
+                sp->next = 0;
+            }
+            continue;
+        }
+    }
+
+    return sk;
+}
