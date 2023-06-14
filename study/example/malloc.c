@@ -28,18 +28,22 @@ int main(void)
     char *p2;
     char *p3;
 
+    printf("%d\n", sizeof(p1));
     my_malloc1(p1);
     printf("%d\n", sizeof(p1));
+
     my_malloc1(&p2);  
     printf("%d\n", sizeof(p2));
+
     p3 =  my_malloc3();  
     printf("%d\n", sizeof(p3));
     
     free(p1);
     p1 = NULL;
     
-    // free(&p2);
-    // p2 = NULL;
+    free(p2);
+    p2 = NULL;
+
     free(p3);
     p3 = NULL;
 
