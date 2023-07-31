@@ -113,6 +113,7 @@ int uart_read(int fd, char* bufptr, int BUFF_SIZE){
 
 #define BUFF_SIZE 255
 char esim[BUFF_SIZE] = "unknown";
+char device[BUFF_SIZE] = "unknown";
 static int MAX=20;
 
 
@@ -126,6 +127,7 @@ int main(int argc, char const *const *argv) {
     }
 
     char result[BUFF_SIZE];
+    int len;
 
     int modem = uart_open(uart_path);
     if (modem < 0) {
@@ -152,25 +154,51 @@ int main(int argc, char const *const *argv) {
         return 0;
     }
 
-
     uart_write(modem, "AT+CGSN\r", 9);
     usleep(50000);
     uart_read(modem, result, BUFF_SIZE);
+    printf("%s %d\n", result, strlen(result));
 
-    int len;
-    if(strlen(result) > 15) {
-        if (strlen(result) <= 17) {
-            len = strlen(result)-2;
-            memcpy(esim, result, len);
-            esim[len] = '\0';
-        } else {
-            len = strlen(result)-9;
-            memcpy(esim, result+7, len);
-            esim[len] = '\0';
+    len = strlen(result);
+    if ((len >= 26) && (len <= 31)) {
+        char *result_esim = strstr(result, "+CGSN:");
+        if (result_esim == NULL) {
+            result_esim = strstr(result, "+CGSN");
+        }
+
+        char *esim1 = strchr(result_esim, ':');
+        if (esim1 == NULL) {
+            esim1 = strchr(result_esim, 'S');
+        }
+
+        char *esim2 = strchr(esim1, 'O');
+
+        int lene = esim2 - esim1;
+        if (lene > 0) {
+            strncpy(esim, esim1+2, lene-2);
+        }
+    }
+
+    uart_write(modem, "AT+CSIM=10,\"0001028208\"\r", 25);
+    usleep(50000);
+    uart_read(modem, result, BUFF_SIZE);
+    printf("%s %d\n", result, strlen(result));
+
+    len = strlen(result);
+    if (len >= 57) {
+    char *result_device = strstr(result, "+CSIM:");
+        if (result_device != NULL) {
+            char *device1 = strchr(result_device, '"');
+            char *device2 = strchr(device1+1, '"');
+
+            int lend = device2 - device1;
+            if (lend > 0) {
+                strncpy(device, device1+1, lend-1);
+            }
         }
     }
 
     uart_close(modem);
-    printf("%s\n", esim);
+    printf("%s %s\n", esim, device);
     return 0;
 }
